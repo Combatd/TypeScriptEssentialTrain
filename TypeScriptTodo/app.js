@@ -1,2 +1,3 @@
-var todo = "Pick up drycleaning";
-var name = "Jess";
+var todo = {
+    name: 'PIck up drycleaning'
+};
