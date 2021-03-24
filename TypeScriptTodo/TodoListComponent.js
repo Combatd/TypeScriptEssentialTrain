@@ -1,32 +1,25 @@
-var TodoListComponent = (function () {
-    
+"use strict";
+exports.__esModule = true;
+require("//code.jquery.com/jquery-1.12.1.min.js");
+var TodoListComponent = /** @class */ (function () {
     function TodoListComponent(el) {
         this.$el = $(el);
     }
-
     TodoListComponent.prototype.render = function (todos) {
-
         this.$el.html('');
-        
         if (!todos.length) {
-            this.$el.html(
-                "<div class='list-group-item text-center text-giant'>" +
+            this.$el.html("<div class='list-group-item text-center text-giant'>" +
                 "    <strong>You've completed everything you needed to do!</strong>" +
-                "</div>"
-            );
-            
+                "</div>");
             return;
         }
-        
-        for(var index in todos) {
+        for (var index in todos) {
             var todo = todos[index];
-            renderTodo(todo).appendTo(this.$el);
+            this.renderTodo(todo).appendTo(this.$el);
         }
     };
-
-    function renderTodo(todo) {
-        return $(
-            "<div class='todo-item list-group-item "+ (todo.state == 2 ? 'completed' : '') +"'>" +
+    TodoListComponent.prototype.renderTodo = function (todo) {
+        return $("<div class='todo-item list-group-item " + (todo.state == 2 ? 'completed' : '') + "'>" +
             "   <div class='row'>" +
             "       <div class='col-md-2 text-center'>" +
             "           <i class='incomplete glyphicon glyphicon-unchecked text-muted text-giant'></i>" +
@@ -38,14 +31,12 @@ var TodoListComponent = (function () {
             "        </div>" +
             "    </div>" +
             "    <div class='clearfix'></div>" +
-            "</div>"
-        ).on('click', function() {
+            "</div>").on('click', function () {
             var event = document.createEvent('CustomEvent');
             event.initCustomEvent('todo-toggle', true, true, { todoId: todo.id });
             this.dispatchEvent(event);
         });
-    }
-
+    };
     return TodoListComponent;
-})();
-
+}());
+exports["default"] = TodoListComponent;
