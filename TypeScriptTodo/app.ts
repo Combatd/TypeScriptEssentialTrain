@@ -1,13 +1,12 @@
-class ToDoService {
+class TodoService {
 
     static lastId: number = 0;
 
     constructor(private todos: Todo[]) {
-        this.todos = todos;
     }
 
     add(todo: Todo) {
-        var newId = TodoService.getNextI();
+        var newId = TodoService.getNextId();
     }
 
     getAll() {
@@ -15,38 +14,55 @@ class ToDoService {
     }
 
     static getNextId() {
-        return ToDoService.lastId += 1;
+        return TodoService.lastId += 1;
     }
 }
-
 
 interface Todo {
     name: string;
     state: TodoState;
 }
 
-// interface ITodoService {
-//     add(todo: Todo): Todo;
-//     delete(todoId: number): void;
-//     getAll(): Todo[];
-//     getById(todoId: number): Todo;
-// }
-
 enum TodoState {
     New = 1,
-    Active = 2,
-    Complete = 3,
-    Deleted = 4
+    Active,
+    Complete,
+    Deleted
 }
 
-let todo: Todo = {
-    name: 'PIck up drycleaning',
-    state: TodoState.New
-};
-
-
-function deleteTodo (todo: Todo) {
-    if (todo.state != TodoState.Complete) {
-        throw "Can't delete incomplete task"
+class SmartTodo {
+    
+    _state: TodoState;
+    
+    name: string;
+    
+    get state() {
+        return this._state;
+    }
+    
+    set state(newState) {
+        
+        if(newState == TodoState.Complete) {
+            
+            var canBeCompleted = 
+                this.state == TodoState.Active
+                || this.state == TodoState.Deleted;
+                
+            if(!canBeCompleted) {
+                throw "Todo must be Active or Deleted in order to be marked Completed"
+            }
+        }
+        
+        this._state = newState;
+    }
+    
+    constructor(name: string) {
+        this.name = name;
     }
 }
+
+var todo = new SmartTodo("Pick up drycleaning");
+
+todo.state = TodoState.Complete;
+
+todo.state
