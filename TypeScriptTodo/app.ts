@@ -1,78 +1,103 @@
-class TodoService {
+// class TodoService {
 
-    private static _lastId: number = 0;
+//     private static _lastId: number = 0;
 
-    private get nextId() {
-        return TodoService.getNextId();
-    }
+//     private get nextId() {
+//         return TodoService.getNextId();
+//     }
 
-    private set nextId(nextId) {
-        TodoService._lastId = nextId - 1;
-    }
+//     private set nextId(nextId) {
+//         TodoService._lastId = nextId - 1;
+//     }
 
-    constructor(private todos: Todo[]) {
-    }
+//     constructor(private todos: Todo[]) {
+//     }
 
-    add(todo: Todo) {
-        var newId = this.nextId;
-    }
+//     add(todo: Todo) {
+//         var newId = this.nextId;
+//     }
 
-    private getAll() {
-        return this.todos;
-    }
+//     private getAll() {
+//         return this.todos;
+//     }
 
-    static getNextId() {
-        return TodoService.lastId += 1;
-    }
-}
+//     static getNextId() {
+//         return TodoService.lastId += 1;
+//     }
+// }
 
-interface Todo {
-    name: string;
-    state: TodoState;
-}
+// interface Todo {
+//     name: string;
+//     state: TodoState;
+// }
 
-enum TodoState {
-    New = 1,
-    Active,
-    Complete,
-    Deleted
-}
+// enum TodoState {
+//     New = 1,
+//     Active,
+//     Complete,
+//     Deleted
+// }
 
-class SmartTodo {
+// class SmartTodo {
     
-    constructor(public name: string) {
+//     constructor(public name: string) {
 
-    }
+//     }
 
-}
+// }
 
-abstract class TodoStateChanger {
+// abstract class TodoStateChanger {
     
-    constructor(private newState: TodoState) {
-    }
+//     constructor(private newState: TodoState) {
+//     }
     
-    abstract canChangeState(todo: Todo): boolean;
+//     abstract canChangeState(todo: Todo): boolean;
     
-    changeState(todo: Todo): Todo {
-        if(this.canChangeState(todo)) {
-            todo.state = this.newState;
-        }
+//     changeState(todo: Todo): Todo {
+//         if(this.canChangeState(todo)) {
+//             todo.state = this.newState;
+//         }
         
-        return todo;
-    }
+//         return todo;
+//     }
     
+// }
+
+// class CompleteTodoStateChanger extends TodoStateChanger {
+    
+//     constructor() { // overriding the constructor
+//         super(TodoState.Complete);
+//     }
+
+//     canChangeState(todo: Todo): boolean {
+//         return !!todo &&
+//             todo.state == TodoState.Active ||
+//             todo.state == TodoState.Deleted;
+//     }
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+function clone<T>(value: T): T {
+    let serialized = JSON.stringify(value);
+    return JSON.parse(serialized);
 }
 
-class CompleteTodoStateChanger extends TodoStateChanger {
-    
-    constructor() { // overriding the constructor
-        super(TodoState.Complete);
-    }
+clone('Hello!');
+clone(123);
 
-    canChangeState(todo: Todo): boolean {
-        return !!todo &&
-            todo.state == TodoState.Active ||
-            todo.state == TodoState.Deleted;
-    }
-
+let todo: Todo = {
+    name: "Miko"
 }
+
+clone(todo);
