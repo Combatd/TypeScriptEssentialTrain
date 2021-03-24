@@ -88,72 +88,79 @@
 
 
 
-function clone<T>(value: T): T {
-    let serialized = JSON.stringify(value);
-    return JSON.parse(serialized);
-}
+// function clone<T>(value: T): T {
+//     let serialized = JSON.stringify(value);
+//     return JSON.parse(serialized);
+// }
 
-clone('Hello!');
-clone(123);
-
-
-clone(true);
-
-const array: number[] = [1, 2, 3];
-const array2: Array<number> = [1, 2, 3];
-
-class KeyValuePair<TKey, TValue> {
-    constructor(public key: TKey, public value: TValue) {
-
-    }
-}
-
-let pair = new KeyValuePair<number, string>(1, 'First');
-let pair2 = new KeyValuePair<string, Date>('Second', new Date(Date.now()));
-let pair3 = new KeyValuePair<number, string>(3, "Third");
-
-class KeyValuePairPrinter <T, U> {
-    constructor(private pairs: KeyValuePair<T, U>[]) {
-
-    }
-
-    print() {
-        for (let p of this.pairs) {
-            console.log(`${p.key}: ${p.value}`);
-        }
-    }
-}
-
-// pair2 doesn't share the same generic type parameters, so it is a different type of object
-// let printer = new KeyValuePairPrinter([pair, pair2, pair3]);
-
-interface IHaveALength {
-    length: number;
-}
-
-function totalLength<T extends IHaveALength>(x: T, y: T) {
-    var total: number = x.length + y.length;
-    return total;
-}
-
-class CustomArray<T> extends Array<T> {}
-
-var length = totalLength([1, 2, 3], new CustomArray<number>())
+// clone('Hello!');
+// clone(123);
 
 
+// clone(true);
 
-var jQuery = {
-    version: 1.10,
-    fn: {}
-};
+// const array: number[] = [1, 2, 3];
+// const array2: Array<number> = [1, 2, 3];
 
-(function defineType($) {
+// class KeyValuePair<TKey, TValue> {
+//     constructor(public key: TKey, public value: TValue) {
 
-    if( $.version < 1.15 ) {
-        throw 'Plugin requires jQuery version 1.15+';
-    }
+//     }
+// }
 
-    $.fn.myPlugin = function() {
-        // my plugin code
-    }
-})(jQuery)
+// let pair = new KeyValuePair<number, string>(1, 'First');
+// let pair2 = new KeyValuePair<string, Date>('Second', new Date(Date.now()));
+// let pair3 = new KeyValuePair<number, string>(3, "Third");
+
+// class KeyValuePairPrinter <T, U> {
+//     constructor(private pairs: KeyValuePair<T, U>[]) {
+
+//     }
+
+//     print() {
+//         for (let p of this.pairs) {
+//             console.log(`${p.key}: ${p.value}`);
+//         }
+//     }
+// }
+
+// // pair2 doesn't share the same generic type parameters, so it is a different type of object
+// // let printer = new KeyValuePairPrinter([pair, pair2, pair3]);
+
+// interface IHaveALength {
+//     length: number;
+// }
+
+// function totalLength<T extends IHaveALength>(x: T, y: T) {
+//     var total: number = x.length + y.length;
+//     return total;
+// }
+
+// class CustomArray<T> extends Array<T> {}
+
+// var length = totalLength([1, 2, 3], new CustomArray<number>())
+
+
+
+// var jQuery = {
+//     version: 1.10,
+//     fn: {}
+// };
+
+// (function defineType($) {
+
+//     if( $.version < 1.15 ) {
+//         throw 'Plugin requires jQuery version 1.15+';
+//     }
+
+//     $.fn.myPlugin = function() {
+//         // my plugin code
+//     }
+// })(jQuery)
+
+
+
+import { Todo as TodoTask, TodoState } from './model';
+import './jQuery'
+
+let todo: TodoTask;
