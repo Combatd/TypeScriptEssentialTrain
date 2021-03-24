@@ -74,3 +74,29 @@ export function required(target: Object, propertyName: string) {
     })
     
 }
+
+export function regex(pattern: string) {
+    
+    let expression = new RegExp(pattern);
+
+    return function regex(target: Object, propertyName: string) {
+
+        let validatable = <{ _validators: IValidator[] }>target,
+            validators = (validatable._validators || (validatable._validators = []));
+
+        validators.push(function(instance) {
+
+            let propertyValue = instance[propertyName],
+                isValid = expression.test(propertyValue);
+
+            return {
+                isValid,
+                message: `${propertyName} does not match ${expression}`,
+                property: propertyName
+            }
+
+        })
+        
+    };
+
+}
