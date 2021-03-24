@@ -1,3 +1,12 @@
+class ToDoService {
+
+    constructor(private todos: Todo[]) {
+        this.todos = todos;
+    }
+    
+}
+
+
 interface Todo {
     name: string;
     state: TodoState;
