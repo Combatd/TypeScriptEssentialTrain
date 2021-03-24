@@ -96,8 +96,33 @@ function clone<T>(value: T): T {
 clone('Hello!');
 clone(123);
 
-let todo: Todo = {
-    name: "Miko"
+
+clone(true);
+
+const array: number[] = [1, 2, 3];
+const array2: Array<number> = [1, 2, 3];
+
+class KeyValuePair<TKey, TValue> {
+    constructor(public key: TKey, public value: TValue) {
+
+    }
 }
 
-clone(todo);
+let pair = new KeyValuePair<number, string>(1, 'First');
+let pair2 = new KeyValuePair<string, Date>('Second', new Date(Date.now()));
+let pair3 = new KeyValuePair<number, string>(3, "Third");
+
+class KeyValuePairPrinter <T, U> {
+    constructor(private pairs: KeyValuePair<T, U>[]) {
+
+    }
+
+    print() {
+        for (let p of this.pairs) {
+            console.log(`${p.key}: ${p.value}`);
+        }
+    }
+}
+
+// pair2 doesn't share the same generic type parameters, so it is a different type of object
+// let printer = new KeyValuePairPrinter([pair, pair2, pair3]);
