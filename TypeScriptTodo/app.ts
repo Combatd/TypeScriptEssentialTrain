@@ -139,3 +139,21 @@ function totalLength<T extends IHaveALength>(x: T, y: T) {
 class CustomArray<T> extends Array<T> {}
 
 var length = totalLength([1, 2, 3], new CustomArray<number>())
+
+
+
+var jQuery = {
+    version: 1.10,
+    fn: {}
+};
+
+(function defineType($) {
+
+    if( $.version < 1.15 ) {
+        throw 'Plugin requires jQuery version 1.15+';
+    }
+
+    $.fn.myPlugin = function() {
+        // my plugin code
+    }
+})(jQuery)
